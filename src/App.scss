@@ -2,9 +2,19 @@
 
 .App {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
+}
+
+.appname-container {
+	position: relative;
+}
+
+.name__red,
+.name__orange {
+	position: absolute;
 }
 
 .board {
@@ -14,18 +24,66 @@
 	box-shadow: 0px 4px 4px $orange;
 	display: grid;
 	grid-template-columns: repeat(9, 1fr);
-	flex-wrap: wrap;
+
 	gap: 5px;
 	padding: 10px;
 	&__cell {
-		width: 30px;
-		height: 30px;
+		width: 32px;
+		height: 32px;
 		background: $light-red;
 		border: 2px solid $red;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		&:focus {
+			outline-color: $red;
+		}
+		&--uncover {
+			background: $light-gray;
+			border: 2px solid $gray;
+			&:focus {
+				outline-color: $gray;
+			}
+		}
+		&--flagged {
+			background: $light-teal;
+			border: 2px solid $teal;
+			&:focus {
+				outline-color: $teal;
+			}
+		}
 		&:hover {
-			transform: rotate(10deg);
+			// transform: rotate(10deg);
+			// animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+			cursor: pointer;
+		}
+		&:active {
+			transform: rotate(0deg);
 			transition: all 0.1s ease-in-out 0s;
 			cursor: pointer;
 		}
+	}
+}
+
+@keyframes shake {
+	10%,
+	90% {
+		transform: translate3d(-1px, 0, 0);
+	}
+
+	20%,
+	80% {
+		transform: translate3d(2px, 0, 0);
+	}
+
+	30%,
+	50%,
+	70% {
+		transform: translate3d(-4px, 0, 0);
+	}
+
+	40%,
+	60% {
+		transform: translate3d(4px, 0, 0);
 	}
 }
