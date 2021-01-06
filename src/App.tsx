@@ -4,29 +4,37 @@ import Quarantine from './assets/quarantine.svg';
 import Coronavirus from './assets/coronavirus.svg';
 
 import { StatusType, ValueType, Cell, useCells } from './hooks/useCells';
+import { openCells } from './helpers/openCells';
 
 function App() {
-	const { cells, setCells } = useCells(9, 9);
+	const rows = 9;
+	const cols = 9;
+	const { cells, setCells } = useCells(rows, cols);
 
 	const handleClick = (index: number) => {
 		// e.preventDefault();
-		let _cells: Cell[] = [...cells];
-		_cells[index].status = StatusType.uncover;
-		setCells(_cells);
+
+		openCells(index, cells, setCells, cols, rows);
 	};
 	const handleRightClick = (index: number) => {
 		let _cells: Cell[] = [...cells];
-		_cells[index].status = StatusType.flagged;
+		if (_cells[index].status !== StatusType.flagged && _cells[index].status === StatusType.cover) {
+			_cells[index].status = StatusType.flagged;
+		} else if (_cells[index].status === StatusType.uncover) {
+			return;
+		} else {
+			_cells[index].status = StatusType.cover;
+		}
 		setCells(_cells);
 	};
 
 	return (
 		<>
 			<div className="App">
-				<div className="appname-container">
+				{/* <div className="appname-container">
 					<span className="name__red">Covid-19</span>
 					<span className="name__orange">Covid-19</span>
-				</div>
+				</div> */}
 				<div className="board">
 					{cells.map((item, index) => (
 						<button
@@ -37,7 +45,7 @@ function App() {
 							}}
 							className={`board__cell${
 								item.status === StatusType.uncover
-									? ' board__cell--uncover'
+									? ` board__cell--uncover color-${item.value}`
 									: item.status === StatusType.flagged
 									? ' board__cell--flagged'
 									: ''
@@ -48,7 +56,7 @@ function App() {
 								<img src={Quarantine} alt="React Logo" />
 							) : item.status === StatusType.uncover && item.value === ValueType.bomb ? (
 								<img src={Coronavirus} alt="React Logo" />
-							) : item.status === StatusType.uncover ? (
+							) : item.status === StatusType.uncover && item.value !== ValueType.zero ? (
 								`${item.value}`
 							) : (
 								''

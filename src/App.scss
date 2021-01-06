@@ -35,6 +35,8 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		font-size: 20px;
+		font-weight: 900;
 		&:focus {
 			outline-color: $red;
 		}
@@ -63,6 +65,31 @@
 			cursor: pointer;
 		}
 	}
+}
+
+.color-1 {
+	color: $navy;
+}
+.color-2 {
+	color: $pink;
+}
+.color-3 {
+	color: $violet;
+}
+.color-4 {
+	color: $yellow;
+}
+.color-5 {
+	color: $blue;
+}
+.color-6 {
+	color: $green;
+}
+.color-7 {
+	color: $brown;
+}
+.color-8 {
+	color: $light-teal;
 }
 
 @keyframes shake {
