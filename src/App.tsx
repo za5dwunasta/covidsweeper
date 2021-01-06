@@ -48,6 +48,8 @@ function App() {
 								<img src={Quarantine} alt="React Logo" />
 							) : item.status === StatusType.uncover && item.value === ValueType.bomb ? (
 								<img src={Coronavirus} alt="React Logo" />
+							) : item.status === StatusType.uncover ? (
+								`${item.value}`
 							) : (
 								''
 							)}

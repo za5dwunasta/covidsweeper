@@ -7,9 +7,9 @@ export enum StatusType {
 }
 
 export enum ValueType {
-	zero,
-	one,
-	two,
+	zero = 0,
+	one = 1,
+	two = 2,
 	three,
 	four,
 	five,
@@ -51,9 +51,84 @@ export function useCells(rows: number, cols: number, bombs: number = 10) {
 		// step 3: put numbers
 
 		for (let i = 0; i < cellsNo; i++) {
+			let numberOfBombs: number = 0;
 			if (_cells[i].value !== ValueType.bomb) {
-				if (i === 0) {
+				if (i > 0 && i < cols - 1) {
+					// first row w/o corners
+					console.log('first row' + i);
+					if (_cells[i - 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols - 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols + 1].value === ValueType.bomb) numberOfBombs++;
+				} else if (i > cellsNo - cols && i < cellsNo - 1) {
+					// last row w/o corners
+					console.log('last row' + i);
+
+					if (_cells[i - 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols - 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols + 1].value === ValueType.bomb) numberOfBombs++;
+				} else if (i % cols === 0 && i !== 0 && i !== cellsNo - cols) {
+					// first column w/o corners
+					console.log('first col' + i);
+
+					if (_cells[i + 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols + 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols + 1].value === ValueType.bomb) numberOfBombs++;
+				} else if (i % cols === cols - 1 && i !== cols - 1 && i !== cellsNo - 1) {
+					// last column w/o corners
+					console.log('last col' + i);
+
+					if (_cells[i - 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols - 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols - 1].value === ValueType.bomb) numberOfBombs++;
+				} else if (i === 0) {
+					// top left corner
+					console.log('top left' + i);
+
+					if (_cells[i + 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols + 1].value === ValueType.bomb) numberOfBombs++;
+				} else if (i === cols - 1) {
+					// top right corner
+					console.log('top right' + i);
+
+					if (_cells[i - 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols - 1].value === ValueType.bomb) numberOfBombs++;
+				} else if (i === cellsNo - cols) {
+					// bottom left corner
+					console.log('bottom left' + i);
+
+					if (_cells[i + 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols + 1].value === ValueType.bomb) numberOfBombs++;
+				} else if (i === cellsNo - 1) {
+					// bottom right corner
+					console.log('bottom right' + i);
+
+					if (_cells[i - 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols - 1].value === ValueType.bomb) numberOfBombs++;
+				} else {
+					// rest?
+					if (_cells[i - 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols - 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i - cols + 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols - 1].value === ValueType.bomb) numberOfBombs++;
+					if (_cells[i + cols + 1].value === ValueType.bomb) numberOfBombs++;
 				}
+
+				_cells[i].value = numberOfBombs;
 			}
 		}
 
