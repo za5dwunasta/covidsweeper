@@ -26,6 +26,8 @@ export type Cell = {
 
 export function useCells(rows: number, cols: number, bombs: number = 10) {
 	const cellsNo = rows * cols;
+	const root = document.documentElement;
+	root.style.setProperty('--cols', `${cols}`);
 	const [cells, setCells] = useState<Cell[]>([]);
 	useEffect(() => {
 		// step 1: generate plain table
