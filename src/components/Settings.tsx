@@ -3,7 +3,7 @@ import './Settings.scss';
 import { useCellsValue } from '../context/cells-context';
 
 export default function Settings() {
-	const { setRows, setCols, setBombs, setLive } = useCellsValue();
+	const { setRows, setCols, setBombs, setLive, setRefresh } = useCellsValue();
 
 	const [tempCols, setTempCols] = useState<string>('9');
 	const [tempRows, setTempRows] = useState<string>('9');
@@ -11,17 +11,22 @@ export default function Settings() {
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
+		if (parseInt(tempBombs) >= parseInt(tempCols) * parseInt(tempRows)) {
+			alert('Covid conquered the city!');
+			return;
+		}
 		setLive(true);
 		setRows(parseInt(tempRows));
 		setCols(parseInt(tempCols));
 		setBombs(parseInt(tempBombs));
+		setRefresh(true);
 	};
 
 	return (
 		<div className="settings">
 			<form className="settings__form" action="">
 				<input
-					type="text"
+					type="number"
 					placeholder="9"
 					onChange={(e) => {
 						setTempCols(e.target.value);
@@ -29,7 +34,7 @@ export default function Settings() {
 					value={tempCols}
 				/>
 				<input
-					type="text"
+					type="number"
 					placeholder="9"
 					onChange={(e) => {
 						setTempRows(e.target.value);
@@ -37,7 +42,7 @@ export default function Settings() {
 					value={tempRows}
 				/>
 				<input
-					type="text"
+					type="number"
 					placeholder="9"
 					onChange={(e) => {
 						setTempBombs(e.target.value);

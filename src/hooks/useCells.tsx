@@ -24,12 +24,14 @@ export type Cell = {
 	value: ValueType;
 };
 
-export function useCells(rows: number, cols: number, bombs: number = 10, setLive: Function, live: boolean) {
+export function useCells(rows: number, cols: number, bombs: number = 10, setRefresh: Function, refresh: boolean) {
 	const cellsNo: number = rows * cols;
 	const root = document.documentElement;
 	root.style.setProperty('--cols', `${cols}`);
 	const [cells, setCells] = useState<Cell[]>([]);
 	useEffect(() => {
+		if (!refresh) return;
+
 		// step 1: generate plain table
 		let _cells: Cell[] = Array(...Array(cellsNo)).map((_) => ({
 			status: StatusType.cover,
@@ -119,9 +121,9 @@ export function useCells(rows: number, cols: number, bombs: number = 10, setLive
 		}
 
 		setCells(_cells);
-
+		setRefresh(false);
 		console.log(cells);
-	}, [cols, rows, bombs]);
+	}, [cols, rows, bombs, refresh]);
 
 	return { cells, setCells };
 }
