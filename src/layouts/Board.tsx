@@ -36,6 +36,7 @@ export default function Board() {
 		<div className="board">
 			{cells.map((item, index) => (
 				<button
+					disabled={item.status === StatusType.uncover ? true : false}
 					onClick={(e): void => handleClick(index)}
 					onContextMenu={(e): void => {
 						e.preventDefault();

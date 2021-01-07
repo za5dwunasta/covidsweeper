@@ -24,7 +24,7 @@ export type Cell = {
 	value: ValueType;
 };
 
-export function useCells(rows: number, cols: number, bombs: number = 10) {
+export function useCells(rows: number, cols: number, bombs: number = 10, setLive: Function, live: boolean) {
 	const cellsNo: number = rows * cols;
 	const root = document.documentElement;
 	root.style.setProperty('--cols', `${cols}`);

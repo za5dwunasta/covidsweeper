@@ -10,6 +10,9 @@ interface ICells {
 	live: boolean;
 	setCells: (cells: Cell[]) => void;
 	setLive: (live: boolean) => void;
+	setRows: (rows: number) => void;
+	setCols: (cols: number) => void;
+	setBombs: (cols: number) => void;
 }
 
 const ICellsValue: ICells = {
@@ -20,6 +23,9 @@ const ICellsValue: ICells = {
 	live: false,
 	setCells: () => {},
 	setLive: () => {},
+	setRows: () => {},
+	setCols: () => {},
+	setBombs: () => {},
 };
 
 export type Props = {
@@ -28,11 +34,13 @@ export type Props = {
 
 export const CellsContext = createContext<ICells>(ICellsValue);
 export const CellsProvider = ({ children }: { children: React.ReactNode }) => {
-	const rows = 15;
-	const cols = 15;
-	const bombs = 20;
+	const [rows, setRows] = useState(9);
+	const [cols, setCols] = useState(9);
+	const [bombs, setBombs] = useState(10);
+
+	const [newGame, setNewGame] = useState(true);
 	const [live, setLive] = useState(true);
-	const { cells, setCells } = useCells(rows, cols, bombs);
+	const { cells, setCells } = useCells(rows, cols, bombs, setLive, live);
 	console.log('context ' + cells);
 	return (
 		<CellsContext.Provider
@@ -44,6 +52,9 @@ export const CellsProvider = ({ children }: { children: React.ReactNode }) => {
 				live,
 				setLive,
 				setCells,
+				setRows,
+				setCols,
+				setBombs,
 			}}
 		>
 			{children}

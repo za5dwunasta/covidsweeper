@@ -1,0 +1,23 @@
+@import '../_variables.scss';
+
+.display-board {
+	&__data {
+		background: $teal;
+		border: 3px solid $light-teal;
+		box-sizing: border-box;
+		box-shadow: 0px 3px 3px $teal;
+		padding: 4px;
+		color: #eef5f6;
+		text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		font-weight: bold;
+		font-size: 32px;
+		text-align: center;
+	}
+	&__desc {
+		font-style: normal;
+		font-weight: 900;
+		color: #c3d1d2;
+		text-transform: uppercase;
+		font-size: 8px;
+	}
+}

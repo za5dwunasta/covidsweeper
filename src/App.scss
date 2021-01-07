@@ -5,13 +5,16 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	min-height: 100vh;
 }
 
 .appname-container {
 	margin-bottom: 16px;
-	align-content: center;
-	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	max-width: 600px;
+	gap: 20px;
 }
 
 .board {
@@ -114,4 +117,11 @@
 	60% {
 		transform: translate3d(4px, 0, 0);
 	}
+}
+
+.board-settings {
+	margin-top: 8px;
+	font-weight: normal;
+	color: $teal;
+	font-size: 12px;
 }
