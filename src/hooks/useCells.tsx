@@ -25,7 +25,7 @@ export type Cell = {
 };
 
 export function useCells(rows: number, cols: number, bombs: number = 10) {
-	const cellsNo = rows * cols;
+	const cellsNo: number = rows * cols;
 	const root = document.documentElement;
 	root.style.setProperty('--cols', `${cols}`);
 	const [cells, setCells] = useState<Cell[]>([]);
@@ -121,7 +121,7 @@ export function useCells(rows: number, cols: number, bombs: number = 10) {
 		setCells(_cells);
 
 		console.log(cells);
-	}, [cols, rows]);
+	}, [cols, rows, bombs]);
 
 	return { cells, setCells };
 }

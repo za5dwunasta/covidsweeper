@@ -8,9 +8,9 @@ export const openCells = (
 	rows: number,
 	setLive: Function
 ) => {
-	let _cells: Cell[] = [...cells];
-	if (cells[index].status === StatusType.flagged || cells[index].status === StatusType.uncover) return;
-	if (cells[index].value === ValueType.bomb) {
+	let _cells: Cell[] = [...cells!];
+	if (_cells[index].status === StatusType.flagged || _cells[index].status === StatusType.uncover) return;
+	if (_cells[index].value === ValueType.bomb) {
 		_cells.map((cell) => (cell.status = cell.value === ValueType.bomb ? StatusType.uncover : cell.status));
 		setLive(false);
 		alert('bomb!');

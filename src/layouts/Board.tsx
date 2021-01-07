@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { StatusType, ValueType, Cell, useCells } from '../hooks/useCells';
 import Quarantine from '../assets/quarantine.svg';
 import Coronavirus from '../assets/coronavirus.svg';
+import { useCellsValue } from '../context/cells-context';
 import { openCells } from '../helpers/openCells';
 
 export default function Board() {
+	const { rows, cols, cells, setCells, live, setLive } = useCellsValue();
 	// const rows = 15;
 	// const cols = 15;
 	// const bombs = 20;
@@ -16,6 +18,7 @@ export default function Board() {
 		if (!live) return;
 
 		openCells(index, cells, setCells, cols, rows, setLive);
+		// openCells(index);
 	};
 	const handleRightClick = (index: number) => {
 		if (!live) return;
