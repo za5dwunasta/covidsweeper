@@ -24,7 +24,14 @@ export type Cell = {
 	value: ValueType;
 };
 
-export function useCells(rows: number, cols: number, bombs: number = 10, setRefresh: Function, refresh: boolean) {
+export function useCells(
+	rows: number,
+	cols: number,
+	bombs: number = 10,
+	setRefresh: Function,
+	refresh: boolean,
+	setBombsDisplay: Function
+) {
 	const cellsNo: number = rows * cols;
 	const root = document.documentElement;
 	root.style.setProperty('--cols', `${cols}`);
@@ -121,8 +128,8 @@ export function useCells(rows: number, cols: number, bombs: number = 10, setRefr
 		}
 
 		setCells(_cells);
+		setBombsDisplay(bombs);
 		setRefresh(false);
-		console.log(cells);
 	}, [cols, rows, bombs, refresh]);
 
 	return { cells, setCells };

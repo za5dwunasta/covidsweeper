@@ -13,7 +13,6 @@ export const openCells = (
 	if (_cells[index].value === ValueType.bomb) {
 		_cells.map((cell) => (cell.status = cell.value === ValueType.bomb ? StatusType.uncover : cell.status));
 		setLive(false);
-		alert('bomb!');
 	}
 	if (_cells[index].value !== ValueType.zero) {
 		_cells[index].status = StatusType.uncover;

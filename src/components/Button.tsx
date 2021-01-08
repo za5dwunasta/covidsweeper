@@ -7,11 +7,12 @@ type ButtonProps = {
 };
 
 const Button: React.FunctionComponent<ButtonProps> = ({ text }) => {
-	const { setRefresh, setLive } = useCellsValue();
+	const { setRefresh, setLive, setTime } = useCellsValue();
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 		setLive(true);
+		setTime(0);
 		setRefresh(true);
 	};
 	return (

@@ -6,7 +6,7 @@ import { useCellsValue } from '../context/cells-context';
 import { openCells } from '../helpers/openCells';
 
 export default function Board() {
-	const { rows, cols, cells, setCells, live, setLive } = useCellsValue();
+	const { rows, cols, cells, setCells, live, setLive, bombsDisplay, setBombsDisplay } = useCellsValue();
 	// const rows = 15;
 	// const cols = 15;
 	// const bombs = 20;
@@ -25,10 +25,12 @@ export default function Board() {
 		let _cells: Cell[] = [...cells];
 		if (_cells[index].status !== StatusType.flagged && _cells[index].status === StatusType.cover) {
 			_cells[index].status = StatusType.flagged;
+			setBombsDisplay(bombsDisplay - 1);
 		} else if (_cells[index].status === StatusType.uncover) {
 			return;
 		} else {
 			_cells[index].status = StatusType.cover;
+			setBombsDisplay(bombsDisplay + 1);
 		}
 		setCells(_cells);
 	};
