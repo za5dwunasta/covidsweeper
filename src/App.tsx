@@ -11,6 +11,7 @@ import Settings from './components/Settings';
 
 function App() {
 	const { bombsDisplay, live, time, setTime } = useCellsValue();
+	const [settingsVisible, setSettingsVisible] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (live && time < 999) {
@@ -33,8 +34,11 @@ function App() {
 			</div>
 			<Board />
 			<Button text="new game" />
-			<span className="board-settings">change board size</span>
-			<Settings />
+
+			<button className="board-settings" onClick={() => setSettingsVisible(!settingsVisible)}>
+				change board size
+			</button>
+			{settingsVisible ? <Settings setSettingsVisable={setSettingsVisible} /> : ''}
 		</div>
 	);
 }
