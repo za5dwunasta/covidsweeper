@@ -8,10 +8,27 @@ import Button from './components/Button';
 import DisplayData from './components/DisplayData';
 import { useCellsValue } from './context/cells-context';
 import Settings from './components/Settings';
+import { StatusType, ValueType } from './hooks/useCells';
 
 function App() {
-	const { bombsDisplay, live, time, setTime } = useCellsValue();
+	const { bombsDisplay, live, time, setTime, setLive, cells, bombs } = useCellsValue();
 	const [settingsVisible, setSettingsVisible] = useState<boolean>(false);
+
+	useEffect(() => {
+		if (bombsDisplay === 0) {
+			let matches = 0;
+
+			for (let i = 0; i < cells.length; i++) {
+				if (cells[i].status === StatusType.flagged && cells[i].value === ValueType.bomb) {
+					matches++;
+				}
+			}
+			if (matches === bombs) {
+				setLive(false);
+				console.log('You won!');
+			}
+		}
+	}, [bombsDisplay]);
 
 	useEffect(() => {
 		if (live && time < 999) {

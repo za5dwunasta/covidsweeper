@@ -6,7 +6,7 @@
 // Board size
 $rows: var(--rows);
 $cols: var(--cols);
-$width: calc(32 * var(--cols));
+$width: calc(42px * 15);
 
 // Squares
 $light-orange: #fdbf00;

@@ -1,11 +1,14 @@
 @import './_variables.scss';
 
 .App {
-	display: flex;
+	display: inline-flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
+	overflow: auto;
+	margin: 10px;
+	min-width: 96vw;
 }
 
 .appname-container {
