@@ -5,6 +5,8 @@ import Logo from './assets/logo.png';
 
 import Board from './layouts/Board';
 import Button from './components/Button';
+import Won from './components/Won';
+
 import DisplayData from './components/DisplayData';
 import { useCellsValue } from './context/cells-context';
 import Settings from './components/Settings';
@@ -13,6 +15,7 @@ import { StatusType, ValueType } from './hooks/useCells';
 function App() {
 	const { bombsDisplay, live, time, setTime, setLive, cells, bombs } = useCellsValue();
 	const [settingsVisible, setSettingsVisible] = useState<boolean>(false);
+	const [won, setWon] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (bombsDisplay === 0) {
@@ -25,6 +28,7 @@ function App() {
 			}
 			if (matches === bombs) {
 				setLive(false);
+				setWon(true);
 				console.log('You won!');
 			}
 		}
@@ -56,6 +60,7 @@ function App() {
 				change board size
 			</button>
 			{settingsVisible ? <Settings setSettingsVisable={setSettingsVisible} /> : ''}
+			{won ? <Won setWon={setWon} /> : ''}
 		</div>
 	);
 }

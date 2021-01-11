@@ -4,9 +4,10 @@ import { useCellsValue } from '../context/cells-context';
 
 type ButtonProps = {
 	text: string;
+	close?: (won: boolean) => void;
 };
 
-const Button: React.FunctionComponent<ButtonProps> = ({ text }) => {
+const Button: React.FunctionComponent<ButtonProps> = ({ text, close }) => {
 	const { setRefresh, setLive, setTime } = useCellsValue();
 
 	const handleSubmit = (e: any) => {
@@ -14,6 +15,9 @@ const Button: React.FunctionComponent<ButtonProps> = ({ text }) => {
 		setLive(true);
 		setTime(0);
 		setRefresh(true);
+		if (close) {
+			close(false);
+		}
 	};
 	return (
 		<button onClick={handleSubmit} className="button">
